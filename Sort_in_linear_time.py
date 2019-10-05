@@ -4,7 +4,8 @@ class ksort:
     def __init__(self):
         self.first_symbol=['a','b','c','d','e','f','g','h']
         self.secont_and_third_symbol=["1","2","3","4","5","6","7","8","9","0"]
-        self.size=len(self.first_symbol)*len(self.secont_and_third_symbol)**2+9
+        self.size=len(self.first_symbol)*len(self.secont_and_third_symbol)**2
+        self.const=10228
         self.items=[None]*self.size
 
     def IsItRightString(self,s):
@@ -24,21 +25,21 @@ class ksort:
     
     def add(self,s):
         #Метод размещает строку s в массиве items в соответствующей позиции и возвращает true; а если строка некорректного формата, возвращает false
-        s=self.IsItRightString(s)
-        if s==-1:
+        data_indexes=self.index(s)
+        if data_indexes==-1:
             return False
         else:
-            len_s=len(s)
-            data_array=[]
-            for i in range(0,len_s):
-                data_array.append(sum(ord(s[i][j])**(3-j+1) for j in range(len(s[i])))%self.size)
-            for hesh in range(0,len(data_array)):
-                self.items[data_array[hesh]]=s[hesh]
+            for i in range(0,len(data_indexes)):
+                if self.items[data_indexes[i]]==None:
+                    #self.items[data_indexes[i]]=s[i]
+                    self.items[data_indexes[i]]=1
+                else:
+                    self.items[data_indexes[i]]+=1
         return True
 
 
     def index(self,s):
-        #Метод вычесляет хеш входных данных s
+        #Метод вычесляет индекс в массиве
         s=self.IsItRightString(s)
         if s==-1:
             return -1
@@ -46,13 +47,18 @@ class ksort:
             len_s=len(s)
             data_array=[]
             for i in range(0,len_s):
-                data_array.append(sum(ord(s[i][j])**(3-j+1) for j in range(len(s[i])))%self.size)
+                index_number=0
+                for j in range(0,len(s[i])):
+                    index_number=index_number+ord(s[i][j])*(10**(2-j))
+                index_number=index_number-self.const
+                data_array.append(index_number)
         return data_array
 """
-S="a00"
 Z=ksort()
-Z.add(S)
-Z.add("d34")
+s="a00"
+#print(Z.index(s))
+
+print(Z.add(s))
 print(Z.items)
 """
 
