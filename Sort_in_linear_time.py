@@ -29,12 +29,11 @@ class ksort:
         if data_indexes==-1:
             return False
         else:
-            for i in range(0,len(data_indexes)):
-                if self.items[data_indexes[i]]==None:
-                    #self.items[data_indexes[i]]=s[i]
-                    self.items[data_indexes[i]]=1
-                else:
-                    self.items[data_indexes[i]]+=1
+            if self.items[data_indexes]==None:
+                #self.items[data_indexes[i]]=s[i]
+                self.items[data_indexes]=1
+            else:
+                self.items[data_indexes]+=1
         return True
 
 
@@ -45,18 +44,18 @@ class ksort:
             return -1
         else:
             len_s=len(s)
-            data_array=[]
+            out_index=[]
             for i in range(0,len_s):
                 index_number=0
                 for j in range(0,len(s[i])):
                     index_number=index_number+ord(s[i][j])*(10**(2-j))
                 index_number=index_number-self.const
-                data_array.append(index_number)
-        return data_array
+                out_index=index_number
+        return out_index
 """
 Z=ksort()
 s="a00"
-#print(Z.index(s))
+print(Z.index(s))
 
 print(Z.add(s))
 print(Z.items)
