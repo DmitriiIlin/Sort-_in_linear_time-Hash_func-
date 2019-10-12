@@ -30,8 +30,8 @@ class ksort:
             return False
         else:
             if self.items[data_indexes]==None:
-                #self.items[data_indexes[i]]=s[i]
-                self.items[data_indexes]=1
+                self.items[data_indexes]=s
+                #self.items[data_indexes]=1
             else:
                 self.items[data_indexes]+=1
         return True
